@@ -58,6 +58,7 @@ node web.js        # Runs at http://localhost:3400
 Open in your browser:
 http://localhost:3400/{your-name}
 
+---
 
 # Key Concept
 This project illustrates the internal behavior of Client-Side Rendering (CSR) — how frameworks fetch data, update the DOM, and render dynamic views — implemented manually with vanilla JavaScript and Express.js.
