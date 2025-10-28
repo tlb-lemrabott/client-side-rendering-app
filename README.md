@@ -17,8 +17,9 @@ It demonstrates how a client-side rendering framework works under the hood — l
 - Two separate Node.js + Express.js servers:
   - **Frontend (`ui-code`)** → serves HTML, CSS, and JavaScript at `http://localhost:3400`
   - **Backend API (`backend-api`)** → returns mock JSON data at `http://localhost:3000/:userId`
-- Mimics how frameworks like React or Vue render UI dynamically on the client side
+- Mimics how frameworks like React or Vue render UI dynamically on the client side.
 
+```bash
 mini-client-side-rendering/
 │
 ├── backend-api/ # Express API server (port 3000)
@@ -31,6 +32,7 @@ mini-client-side-rendering/
 │ └── styles.css
 │
 └── README.md
+```
 
 ---
 ## Run Locally
