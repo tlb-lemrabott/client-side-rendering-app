@@ -10,12 +10,18 @@ export function requestLogger(req, res, next) {
   const receivedAt = new Date();
 
   req.id = reqId;
+  const userAgent = req.headers['user-agent'] || null;
+  const referer = req.headers['referer'] || req.headers['referrer'] || null;
+  const ip = (req.headers['x-forwarded-for']?.split(',')[0] || req.ip || req.connection?.remoteAddress || null);
 
   log.info('Request received', {
     reqId,
     method: req.method,
     path: req.originalUrl || req.url,
     receivedAt: receivedAt.toISOString(),
+    userAgent,
+    referer,
+    ip,
   });
 
   res.on('finish', () => {
@@ -29,9 +35,11 @@ export function requestLogger(req, res, next) {
       status: res.statusCode,
       durationMs: Number(durationMs.toFixed(2)),
       respondedAt: respondedAt.toISOString(),
+      userAgent,
+      referer,
+      ip,
     });
   });
 
   next();
 }
-
