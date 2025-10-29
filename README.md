@@ -56,7 +56,7 @@ node web.js        # Runs at http://localhost:4000
 ```
 
 Open in your browser:
-http://localhost:3400/{your-name}
+http://localhost:3000/{your-name}
 {
   "message": "Hey {your-name}, great to see you!"
 }
