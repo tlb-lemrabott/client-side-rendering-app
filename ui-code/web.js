@@ -17,7 +17,7 @@ const MIME = {
 function toFilePath(urlPath) {
   let p = urlPath.split('?')[0];
   if (p === '/' || p === '') p = '/index.html';
-  const safe = normalize(p).replace(/^\\/+/, '/');
+  const safe = normalize(p).replace(/^\/+/, '/');
   return join(PUBLIC_DIR, safe);
 }
 
@@ -38,4 +38,3 @@ server.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`UI available at http://localhost:${PORT}`);
 });
-
