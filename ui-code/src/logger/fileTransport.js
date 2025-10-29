@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const LOG_DIR = path.resolve(process.cwd(), 'ui-code', 'logs');
+const LOG_DIR = path.resolve(process.cwd(), 'logs');
 const LOG_FILE = path.join(LOG_DIR, 'app.log');
 
 let lastErrorTs = 0;
