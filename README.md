@@ -15,8 +15,8 @@ It demonstrates how a client-side rendering framework works under the hood — l
 
 ## Project Structure
 - Two separate Node.js + Express.js servers:
-  - **Frontend (`ui-code`)** → serves HTML, CSS, and JavaScript at `http://localhost:3400`
-  - **Backend API (`backend-api`)** → returns mock JSON data at `http://localhost:3000/:userId`
+  - **Frontend (`ui-code`)** → serves HTML, CSS, and JavaScript at `http://localhost:4000`
+  - **Backend API (`backend-api`)** → returns mock JSON data at `http://localhost:3000/:your-name`
 - Mimics how frameworks like React or Vue render UI dynamically on the client side.
 
 ```bash
@@ -39,7 +39,7 @@ mini-client-side-rendering/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/mini-client-side-rendering.git
+   git clone git@github.com:tlb-lemrabott/client-side-rendering-app.git
    cd mini-client-side-rendering
 2. Install dependencies in both folders:
 ```bash
@@ -49,14 +49,17 @@ cd ../ui-code && npm install
 3. Start both servers:
 ```bash
 # In backend-api folder
-node api.js        # Runs at http://localhost:3000
+npm start        # Runs at http://localhost:3000
 
 # In ui-code folder
-node web.js        # Runs at http://localhost:3400
+node web.js        # Runs at http://localhost:4000
 ```
 
 Open in your browser:
 http://localhost:3400/{your-name}
+{
+  "message": "Hey {your-name}, great to see you!"
+}
 
 ---
 
