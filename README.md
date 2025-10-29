@@ -13,6 +13,20 @@ It demonstrates how a client-side rendering framework works under the hood — l
 
 ---
 
+## Demo
+![UI Page](static-resources/images/ui.png)
+
+Client console and UI server logs while interacting:
+
+![UI Logs](static-resources/images/ui-logs.png)
+![UI DevTools Console](static-resources/images/ui-devtools-console.png)
+
+Backend API logs recorded during requests:
+
+![Backend Logs](static-resources/images/backend-logs.png)
+
+---
+
 ## Project Structure
 - Two parts:
   - **Backend API (`backend-api`)** → Express server at `http://localhost:3000`
