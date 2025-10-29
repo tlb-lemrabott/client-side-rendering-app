@@ -18,10 +18,18 @@ const formEl = $('#greet-form');
 const nameEl = $('#name');
 const submitEl = $('#submit');
 
+function logDomUpdate(selector, details = {}) {
+  const meta = { selector, ...details };
+  try { console.log('[CSR] DOM update', meta); } catch {}
+  clientLog('info', 'CSR: DOM update', meta);
+}
+
 function setPending(msg = 'Loading…') {
   stateEl.textContent = msg;
   stateEl.classList.remove('error');
   submitEl.disabled = true;
+  logDomUpdate('#state', { prop: 'textContent', value: msg });
+  logDomUpdate('#submit', { prop: 'disabled', value: true });
 }
 
 function setError(msg) {
@@ -29,6 +37,9 @@ function setError(msg) {
   stateEl.classList.add('error');
   submitEl.disabled = false;
   resultEl.hidden = true;
+  logDomUpdate('#state', { classAdded: 'error', prop: 'textContent', value: msg });
+  logDomUpdate('#submit', { prop: 'disabled', value: false });
+  logDomUpdate('#result', { prop: 'hidden', value: true });
 }
 
 function setSuccess(json) {
@@ -37,6 +48,10 @@ function setSuccess(json) {
   submitEl.disabled = false;
   resultEl.hidden = false;
   resultEl.textContent = JSON.stringify(json, null, 2);
+  logDomUpdate('#state', { prop: 'textContent', value: 'Done' });
+  logDomUpdate('#submit', { prop: 'disabled', value: false });
+  logDomUpdate('#result', { prop: 'hidden', value: false });
+  logDomUpdate('#result', { prop: 'textContent', valuePreview: (resultEl.textContent || '').slice(0, 120), length: (resultEl.textContent || '').length });
 }
 
 async function fetchGreeting(name) {
@@ -106,6 +121,7 @@ async function init() {
     }
   } else {
     stateEl.textContent = 'Enter a name and press “Greet me”.';
+    logDomUpdate('#state', { prop: 'textContent', value: 'Enter a name and press “Greet me”.' });
   }
 }
 
