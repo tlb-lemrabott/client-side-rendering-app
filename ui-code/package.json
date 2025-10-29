@@ -1,0 +1,12 @@
+{
+  "name": "mini-csr-ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal client-side rendering UI that fetches backend and updates DOM without reload.",
+  "main": "web.js",
+  "scripts": {
+    "start": "node web.js"
+  }
+}
+
