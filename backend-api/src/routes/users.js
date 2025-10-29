@@ -3,7 +3,6 @@ import { getUserGreeting } from '../services/users.js';
 
 const router = Router();
 
-// If no name is provided, return a helpful message
 router.get('/', (_req, res) => {
   return res.status(400).json({
     error: "Missing name in path parameter",
