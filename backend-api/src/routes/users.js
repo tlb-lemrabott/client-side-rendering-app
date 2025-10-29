@@ -11,9 +11,9 @@ router.get('/', (_req, res) => {
   });
 });
 
-router.get('/:userId', (req, res) => {
-  const { userId } = req.params;
-  const result = getUserGreeting(userId);
+router.get('/:userName', (req, res) => {
+  const { userName } = req.params;
+  const result = getUserGreeting(userName);
   return res.json(result);
 });
 
