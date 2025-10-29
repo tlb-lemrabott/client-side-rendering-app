@@ -19,7 +19,7 @@ It demonstrates how a client-side rendering framework works under the hood — l
     - Endpoint: `GET /:name` → `{ "message": "Hey {name}, great to see you!" }`
     - Root: `GET /` → 400 with hint when name is missing
     - Logs: console and backup file at `backend-api/logs/app.log`
-  - **Frontend (`ui-code`)** → optional placeholder for a static UI (not required to use the API)
+  - **Frontend (`ui-code`)** → static UI demonstrating CSR on `http://localhost:4000`
 
 ```bash
 client-side-rendering-app/
@@ -33,7 +33,12 @@ client-side-rendering-app/
 │       ├── middleware/requestLogger.js
 │       └── logger/                 # Console + file logging
 │
-└── ui-code/                        # (optional) static frontend placeholder
+└── ui-code/                        # Static frontend (port 4000)
+    ├── web.js                      # Tiny static server + POST /__log
+    ├── index.html                  # HTML shell
+    ├── app.js                      # CSR logic (fetch + DOM updates)
+    ├── styles.css                  # UI styles
+    └── src/logger/                 # Console + file logging (ui-code/logs/app.log)
 ```
 
 ---
@@ -62,6 +67,22 @@ http://localhost:3000/
 ```
 
 Logs are written to the console and to `backend-api/logs/app.log` (created automatically). The log lines include request ID, method, path, timestamps, status, duration, and browser info (User-Agent, referer, IP) when present.
+
+4. Run the UI (CSR demo):
+```bash
+cd ui-code
+npm install   # installs logger (already committed, safe to re-run)
+npm start     # http://localhost:4000
+```
+
+Open http://localhost:4000, type a name, and submit. The UI fetches the backend and updates the DOM without a page reload.
+
+UI logs go to the console and to `ui-code/logs/app.log`. The UI server also exposes `POST /__log` so the browser can forward client-side CSR logs to disk.
+
+What gets logged (UI side):
+- Static requests: method, path, status, duration, IP, User-Agent
+- CSR stages: boot, initial fetch, user interaction, request sent (timestamp), response received (timestamp + duration), DOM update or error display
+- DOM update details: which node changed and how, e.g. selector, prop, value/valuePreview
 
 ---
 
