@@ -14,24 +14,26 @@ It demonstrates how a client-side rendering framework works under the hood — l
 ---
 
 ## Project Structure
-- Two separate Node.js + Express.js servers:
-  - **Frontend (`ui-code`)** → serves HTML, CSS, and JavaScript at `http://localhost:4000`
-  - **Backend API (`backend-api`)** → returns mock JSON data at `http://localhost:3000/:your-name`
-- Mimics how frameworks like React or Vue render UI dynamically on the client side.
+- Two parts:
+  - **Backend API (`backend-api`)** → Express server at `http://localhost:3000`
+    - Endpoint: `GET /:name` → `{ "message": "Hey {name}, great to see you!" }`
+    - Root: `GET /` → 400 with hint when name is missing
+    - Logs: console and backup file at `backend-api/logs/app.log`
+  - **Frontend (`ui-code`)** → optional placeholder for a static UI (not required to use the API)
 
 ```bash
-mini-client-side-rendering/
+client-side-rendering-app/
 │
-├── backend-api/ # Express API server (port 3000)
-│ └── api.js
+├── backend-api/                    # Express API server (port 3000)
+│   ├── server.js                   # Entry
+│   └── src/
+│       ├── app.js                  # Express app setup
+│       ├── routes/users.js         # Routes (/:name and /)
+│       ├── services/users.js       # Greeting business logic
+│       ├── middleware/requestLogger.js
+│       └── logger/                 # Console + file logging
 │
-├── ui-code/ # Frontend static app (port 3400)
-│ ├── web.js
-│ ├── index.html
-│ ├── app.js
-│ └── styles.css
-│
-└── README.md
+└── ui-code/                        # (optional) static frontend placeholder
 ```
 
 ---
@@ -41,25 +43,25 @@ mini-client-side-rendering/
    ```bash
    git clone git@github.com:tlb-lemrabott/client-side-rendering-app.git
    cd mini-client-side-rendering
-2. Install dependencies in both folders:
+2. Install dependencies for the backend API:
 ```bash
 cd backend-api && npm install
-cd ../ui-code && npm install
 ```
-3. Start both servers:
+3. Start the backend API:
 ```bash
-# In backend-api folder
-npm start        # Runs at http://localhost:3000
-
-# In ui-code folder
-node web.js        # Runs at http://localhost:4000
+npm start        # http://localhost:3000
 ```
 
-Open in your browser:
-http://localhost:3000/{your-name}
-{
-  "message": "Hey {your-name}, great to see you!"
-}
+Try it in the browser or with curl:
+```bash
+http://localhost:3000/alice
+=> { "message": "Hey Alice, great to see you!" }
+
+http://localhost:3000/
+=> 400 { "error": "Missing name in path parameter", "hint": "Use /{your-name}, e.g., /alice" }
+```
+
+Logs are written to the console and to `backend-api/logs/app.log` (created automatically). The log lines include request ID, method, path, timestamps, status, duration, and browser info (User-Agent, referer, IP) when present.
 
 ---
 
