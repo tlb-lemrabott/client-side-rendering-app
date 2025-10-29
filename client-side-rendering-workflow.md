@@ -2,7 +2,7 @@
 
 ### Description  
 This post breaks down what actually happens under the hood when you build a web app using **Client-Side Rendering (CSR)** — from the moment a browser requests a page to the continuous rendering loop that keeps your app interactive.  
-We’ll use plain JavaScript (no frameworks) to illustrate how modern browsers parse, execute, and render content dynamically through the CSR model.
+We’ll use plain JavaScript (no frameworks) to illustrate how modern browsers parse, execute, and render content dynamically through the CSR model. 
 
 ---
 
